@@ -1,0 +1,22 @@
+---
+name: CI
+
+on: [push]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Generate PDF document
+        uses: hspaans/latexmk-action@v1.1.5
+        with:
+          format: pdf
+          filename: ARA.tex
+      - name: Upload generated pdf
+        uses: actions/upload-artifact@v3
+        with:
+          name: ARA
+          path: ARA.pdf
